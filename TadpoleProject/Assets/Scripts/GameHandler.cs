@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //global neural network data
+    public static int NeuronCount = 50;
+    public static int Size = 50;
+
+    //start
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    //update
     void Update()
     {
         

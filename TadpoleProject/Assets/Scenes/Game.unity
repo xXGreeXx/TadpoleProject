@@ -229,7 +229,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 300
+  m_Mass: 400
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -311,7 +311,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 712fbd83b97342740a01be7df0765944, type: 2}
+  m_Texture: {fileID: 8400000, guid: 08ec1e996c8ad9643960ae64417fb53b, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -336,6 +336,7 @@ GameObject:
   m_Component:
   - component: {fileID: 69285083}
   - component: {fileID: 69285082}
+  - component: {fileID: 69285081}
   m_Layer: 0
   m_Name: BrainViewCamera
   m_TagString: Untagged
@@ -343,6 +344,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &69285081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69285080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bc198254a907f4baff9bffd97f8ea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brainOrigin: {fileID: 701743580}
 --- !u!20 &69285082
 Camera:
   m_ObjectHideFlags: 0
@@ -365,10 +379,10 @@ Camera:
     x: 0
     y: 0
     width: 1
-    height: 3
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 76.39648
+  field of view: 22
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -376,7 +390,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 712fbd83b97342740a01be7df0765944, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: 08ec1e996c8ad9643960ae64417fb53b, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -394,8 +408,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 69285080}
   m_LocalRotation: {x: -0, y: 0.81528795, z: -0, w: 0.57905585}
-  m_LocalPosition: {x: -162, y: 7, z: 287}
-  m_LocalScale: {x: 1.1151, y: 1.032, z: 2.1348}
+  m_LocalPosition: {x: -326, y: 7, z: 614}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -827,6 +841,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 701743581}
+  - component: {fileID: 701743582}
   m_Layer: 0
   m_Name: BrainOrigin
   m_TagString: Untagged
@@ -842,12 +857,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 701743580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 300}
+  m_LocalPosition: {x: 0, y: 0, z: 402.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &701743582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701743580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6129db20f529f544a200569e8ae676b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neurons: []
 --- !u!1 &740892947
 GameObject:
   m_ObjectHideFlags: 0

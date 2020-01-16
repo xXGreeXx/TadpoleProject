@@ -22,9 +22,9 @@ public class TadpoleScript : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             JointMotor2D motor = tailObjects[i].GetComponent<HingeJoint2D>().motor;
-            motor.motorSpeed = (switchs[i] ? -1 : 1) * 60;
+            motor.motorSpeed = (switchs[i] ? -1 : 1) * 100;
             tailObjects[i].GetComponent<HingeJoint2D>().motor = motor;
-            tailObjects[i].GetComponent<ConstantForce2D>().relativeForce = new Vector2(0, Mathf.Abs(motor.motorSpeed) * 20);
+            tailObjects[i].GetComponent<ConstantForce2D>().relativeForce = new Vector2(0, Mathf.Abs(motor.motorSpeed) * 40);
 
             speeds[i] += switchs[i] ? -1 : 1;
 
