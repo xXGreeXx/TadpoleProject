@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 32624781}
   - component: {fileID: 32624783}
   - component: {fileID: 32624784}
+  - component: {fileID: 32624785}
   m_Layer: 5
   m_Name: Tadpole
   m_TagString: Untagged
@@ -228,7 +229,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 300
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -237,6 +238,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &32624785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32624779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38439d5d3647b3442bd2960b986a248c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tailObjects:
+  - {fileID: 2060651042}
+  - {fileID: 1533839401}
+  - {fileID: 584727308}
+  - {fileID: 554294172}
+  - {fileID: 1067733104}
 --- !u!1 &52733504
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +398,7 @@ Transform:
   m_LocalScale: {x: 1.1151, y: 1.032, z: 2.1348}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 109.232, z: 0}
 --- !u!1 &554294172
 GameObject:
@@ -394,6 +413,7 @@ GameObject:
   - component: {fileID: 554294176}
   - component: {fileID: 554294175}
   - component: {fileID: 554294174}
+  - component: {fileID: 554294178}
   m_Layer: 5
   m_Name: Tail4
   m_TagString: Untagged
@@ -435,7 +455,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -5.0594482}
+  m_ConnectedAnchor: {x: 0, y: -5.0594506}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
@@ -456,9 +476,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 25
+  m_LinearDrag: 15
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -501,6 +521,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554294172}
   m_CullTransparentMesh: 0
+--- !u!247 &554294178
+ConstantForce2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554294172}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0}
+  m_RelativeForce: {x: 0, y: 0}
+  m_Torque: 0
 --- !u!1 &584727308
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,6 +545,7 @@ GameObject:
   - component: {fileID: 584727312}
   - component: {fileID: 584727311}
   - component: {fileID: 584727310}
+  - component: {fileID: 584727314}
   m_Layer: 5
   m_Name: Tail3
   m_TagString: Untagged
@@ -555,7 +587,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -5.059457}
+  m_ConnectedAnchor: {x: 0, y: -5.059455}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
@@ -576,9 +608,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 25
+  m_LinearDrag: 15
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -621,6 +653,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 584727308}
   m_CullTransparentMesh: 0
+--- !u!247 &584727314
+ConstantForce2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584727308}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0}
+  m_RelativeForce: {x: 0, y: 0}
+  m_Torque: 0
 --- !u!1 &701743580
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,7 +692,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &740892947
 GameObject:
@@ -819,7 +862,7 @@ RectTransform:
   m_Children:
   - {fileID: 740892948}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -890,7 +933,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1067733104
 GameObject:
@@ -905,6 +948,7 @@ GameObject:
   - component: {fileID: 1067733108}
   - component: {fileID: 1067733107}
   - component: {fileID: 1067733106}
+  - component: {fileID: 1067733110}
   m_Layer: 5
   m_Name: Tail5
   m_TagString: Untagged
@@ -946,7 +990,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -5.0594482}
+  m_ConnectedAnchor: {x: 0, y: -5.0594506}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
@@ -967,9 +1011,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 25
+  m_LinearDrag: 15
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -1012,6 +1056,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067733104}
   m_CullTransparentMesh: 0
+--- !u!247 &1067733110
+ConstantForce2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067733104}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0}
+  m_RelativeForce: {x: 0, y: 0}
+  m_Torque: 0
 --- !u!1 &1122483851
 GameObject:
   m_ObjectHideFlags: 0
@@ -1255,6 +1310,7 @@ GameObject:
   - component: {fileID: 1533839405}
   - component: {fileID: 1533839404}
   - component: {fileID: 1533839403}
+  - component: {fileID: 1533839407}
   m_Layer: 5
   m_Name: Tail2
   m_TagString: Untagged
@@ -1296,7 +1352,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -5.0594435}
+  m_ConnectedAnchor: {x: 0, y: -5.059446}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
@@ -1317,9 +1373,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 25
+  m_LinearDrag: 15
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -1362,6 +1418,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1533839401}
   m_CullTransparentMesh: 0
+--- !u!247 &1533839407
+ConstantForce2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533839401}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0}
+  m_RelativeForce: {x: 0, y: 0}
+  m_Torque: 0
 --- !u!1 &2060651042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1375,6 +1442,7 @@ GameObject:
   - component: {fileID: 2060651044}
   - component: {fileID: 2060651047}
   - component: {fileID: 2060651046}
+  - component: {fileID: 2060651048}
   m_Layer: 5
   m_Name: Tail1
   m_TagString: Untagged
@@ -1452,7 +1520,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -11.209447}
+  m_ConnectedAnchor: {x: 0, y: -11.209443}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
@@ -1473,12 +1541,66 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 25
+  m_LinearDrag: 15
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!247 &2060651048
+ConstantForce2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060651042}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0}
+  m_RelativeForce: {x: 0, y: 0}
+  m_Torque: 0
+--- !u!1 &2060913505
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2060913506}
+  - component: {fileID: 2060913507}
+  m_Layer: 0
+  m_Name: GameHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2060913506
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060913505}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -17.733168, y: -40.48581, z: 621.14514}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2060913507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060913505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e80023be20e634b86704d9ef027dfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
