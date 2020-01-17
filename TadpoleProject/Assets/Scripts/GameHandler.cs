@@ -7,6 +7,8 @@ public class GameHandler : MonoBehaviour
     //global neural network data
     public static int NeuronCount = 50;
     public static int Size = 50;
+    public static int InputNeurons = 10;
+    public static int OutputNeurons = 10;
 
     //start
     void Start()

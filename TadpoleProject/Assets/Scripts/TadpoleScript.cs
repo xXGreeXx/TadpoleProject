@@ -80,8 +80,8 @@ public class TadpoleScript : MonoBehaviour
             lineObjects[i].GetComponent<LineRenderer>().startWidth = 0.1F;
             lineObjects[i].GetComponent<LineRenderer>().endWidth = 0.1F;
 
-            lineObjects[i].GetComponent<LineRenderer>().SetPosition(0, new Vector3(pos.x, pos.y, 110));
-            lineObjects[i].GetComponent<LineRenderer>().SetPosition(1, new Vector3(hitPoint.x, hitPoint.y, 110));
+            lineObjects[i].GetComponent<LineRenderer>().SetPosition(0, new Vector3(pos.x, pos.y, 110.7F));
+            lineObjects[i].GetComponent<LineRenderer>().SetPosition(1, new Vector3(hitPoint.x, hitPoint.y, 110.7F));
         }
 
         //return data
