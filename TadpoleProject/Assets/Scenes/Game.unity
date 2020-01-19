@@ -535,7 +535,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 29
+  field of view: 24
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -855,7 +855,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -5.0594506}
+  m_ConnectedAnchor: {x: 0, y: -5.0594482}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
@@ -1014,7 +1014,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -5.059455}
+  m_ConnectedAnchor: {x: 0, y: -5.059457}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
@@ -1160,7 +1160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6129db20f529f544a200569e8ae676b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neurons: []
+  hiddenNeurons: []
+  inputNeurons: []
+  outputNeurons: []
 --- !u!1 &740892947
 GameObject:
   m_ObjectHideFlags: 0
@@ -1822,7 +1824,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -5.0594506}
+  m_ConnectedAnchor: {x: 0, y: -5.0594482}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
@@ -2479,7 +2481,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -5.059446}
+  m_ConnectedAnchor: {x: 0, y: -5.0594435}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
@@ -3270,7 +3272,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -11.209443}
+  m_ConnectedAnchor: {x: 0, y: -11.209447}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0

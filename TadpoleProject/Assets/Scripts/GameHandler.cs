@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameHandler : MonoBehaviour
 {
     //global neural network data
-    public static int NeuronCount = 300;
+    public static int HiddenNeuronCount = 300;
     public static int Size = 50;
     public static int InputNeurons = 10;
     public static int OutputNeurons = 10;

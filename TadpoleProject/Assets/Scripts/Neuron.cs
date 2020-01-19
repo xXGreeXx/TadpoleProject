@@ -2,17 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Neuron : MonoBehaviour
+public class Neuron : MonoBehaviour, Assets.Scripts.INode
 {
-    // Start is called before the first frame update
+    //globals
+    public List<GameObject> outputAxons = new List<GameObject>();
+    private List<GameObject> neighbors = new List<GameObject>();
+
+    //start
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    //update
     void Update()
     {
         
+    }
+
+    //propagate signal to output axons
+    public void PropagateSignalToAxons(int offset)
+    {
+
+    }
+
+    //encapsulate neighbors for interface
+    public List<GameObject> getNeighbors()
+    {
+        return neighbors;
+    }
+
+    public void setNeighbors(List<GameObject> neighbors)
+    {
+        this.neighbors = neighbors;
     }
 }
