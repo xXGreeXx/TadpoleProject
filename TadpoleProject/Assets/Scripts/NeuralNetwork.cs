@@ -67,7 +67,7 @@ public class NeuralNetwork : MonoBehaviour
             neuron.transform.localScale = new Vector3(2, 2, 2);
             neuron.AddComponent<InputScript>();
 
-            neuron.transform.localPosition = new Vector3(-(totalWidth / 2F) + (i * 10), 0, -GameHandler.Size * 1.75F);
+            neuron.transform.localPosition = new Vector3(-(totalWidth / 2F) + (i * 10), 0, -GameHandler.Size * 1.25F);
 
             inputNeurons.Add(neuron);
         }
@@ -82,7 +82,7 @@ public class NeuralNetwork : MonoBehaviour
             neuron.transform.localScale = new Vector3(2, 2, 2);
             neuron.AddComponent<OutputScript>();
 
-            neuron.transform.localPosition = new Vector3(-(totalWidth / 2F) + (i * 10), 0, GameHandler.Size * 1.75F);
+            neuron.transform.localPosition = new Vector3(-(totalWidth / 2F) + (i * 10), 0, GameHandler.Size * 1.25F);
 
             outputNeurons.Add(neuron);
         }
@@ -138,7 +138,7 @@ public class NeuralNetwork : MonoBehaviour
 
         List<GameObject> sortedObjects = allNeurons.Except(inputNeurons).OrderBy(x => Vector3.Distance(position, x.transform.position)).ToList();
 
-        neighbors = sortedObjects.GetRange(1, 15);
+        neighbors = sortedObjects.GetRange(1, 30);
 
         return neighbors;
     }
