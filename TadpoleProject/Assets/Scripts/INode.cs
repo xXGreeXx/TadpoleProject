@@ -15,5 +15,8 @@ namespace Assets.Scripts
 
         //set neighbors
         void setNeighbors(List<GameObject> neighbors);
+
+        //add output axon
+        void AddAxon(GameObject axon);
     }
 }

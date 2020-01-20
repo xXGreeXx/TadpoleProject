@@ -20,10 +20,19 @@ public class Neuron : MonoBehaviour, Assets.Scripts.INode
         
     }
 
+    //add axon to list
+    public void AddAxon(GameObject axon)
+    {
+        outputAxons.Add(axon);
+    }
+
     //propagate signal to output axons
     public void PropagateSignalToAxons(int offset)
     {
-
+        foreach (GameObject axon in outputAxons)
+        {
+            axon.GetComponent<SynapseScript>().PropagateSpike();
+        }
     }
 
     //encapsulate neighbors for interface

@@ -11,7 +11,16 @@ public class InputScript : MonoBehaviour, Assets.Scripts.INode
     //propagate signal to output axons
     public void PropagateSignalToAxons(int offset)
     {
+        foreach (GameObject axon in outputAxons)
+        {
+            axon.GetComponent<SynapseScript>().PropagateSpike();
+        }
+    }
 
+    //add axon to list
+    public void AddAxon(GameObject axon)
+    {
+        outputAxons.Add(axon);
     }
 
     //encapsulate neighbors for interface

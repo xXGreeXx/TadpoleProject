@@ -99,7 +99,7 @@ public class NeuralNetwork : MonoBehaviour
         //create synapses
         for (int idx = 0; idx < 400; idx++)
         {
-            GameObject preSynapticNeuron = allNeurons[Random.Range(0, allNeurons.Count)];
+            GameObject preSynapticNeuron = allNeurons.Except(outputNeurons).ToList()[Random.Range(0, allNeurons.Except(outputNeurons).ToList().Count)];
             INode preSynapticNeuronScript = (preSynapticNeuron.GetComponent<Neuron>() != null ? (INode)preSynapticNeuron.GetComponent<Neuron>() : (preSynapticNeuron.GetComponent<InputScript>() != null ? (INode)preSynapticNeuron.GetComponent<InputScript>() : null));
             if (preSynapticNeuronScript == null) //don't create outgoing connections from accumulator nodes(output)
                 continue;
@@ -121,7 +121,14 @@ public class NeuralNetwork : MonoBehaviour
             s.transform.position = synapsePivot.transform.position;
             s.transform.localPosition = new Vector3(0, 0, (distance / 2F));
 
+            SynapseScript script = s.AddComponent<SynapseScript>();
+            script.preSynapticNeuron = preSynapticNeuron;
+            script.postSynapticNeuron = postSynapticNeuron;
+            script.delay = 1;
+
             synapsePivot.transform.LookAt(postSynapticNeuron.transform.position);
+
+            preSynapticNeuron.GetComponent<INode>().AddAxon(s);
         }
     }
 

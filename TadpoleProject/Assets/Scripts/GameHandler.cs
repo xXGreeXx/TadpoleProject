@@ -10,6 +10,8 @@ public class GameHandler : MonoBehaviour
     public static int InputNeurons = 10;
     public static int OutputNeurons = 10;
 
+    public const float TickSpeed = 1000F;
+
     //start
     void Start()
     {
