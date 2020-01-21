@@ -58,7 +58,7 @@ public class TadpoleScript : MonoBehaviour
         {
             //calculate ray
             Vector2 pos = transform.position + (transform.up * 1.25F);
-            Vector2 direction = (Vector2)(transform.up) - Vector2.Lerp(transform.right * 1.5F, -transform.right * 1.5F, angle);
+            Vector2 direction = (Vector2)(transform.up) - Vector2.Lerp(transform.right * 1.25F, -transform.right * 1.25F, angle);
 
             Ray2D ray = new Ray2D(pos, direction);
             RaycastHit2D result = Physics2D.Raycast(pos, direction, raycastRange);

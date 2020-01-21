@@ -27,8 +27,8 @@ public class SpikeScript : MonoBehaviour
 
         if (t >= 1)
         {
-            if (postSynapticObject.GetComponent<Neuron>() != null)
-                postSynapticObject.GetComponent<Neuron>().PropagateSignalToAxons(0);
+            //if (postSynapticObject.GetComponent<Neuron>() != null)
+            //    postSynapticObject.GetComponent<Neuron>().PropagateSignalToAxons(0);
             //else
             //    postSynapticObject.transform.parent.GetComponent<AccumulatorScript>().AddSpike();
 

@@ -8,6 +8,32 @@ public class InputScript : MonoBehaviour, Assets.Scripts.INode
     public List<GameObject> outputAxons = new List<GameObject>();
     private List<GameObject> neighbors = new List<GameObject>();
 
+    private float time = 0;
+    private float firingRate = 1;
+
+    public float membranePotential = 0;
+
+    //update
+    void Update()
+    {
+        time += (Time.deltaTime * 1000);
+
+        float t = (time / GameHandler.TickSpeed);
+
+        if (t >= firingRate)
+        {
+            PropagateSignalToAxons(0);
+
+            time = 0;
+        }
+
+        if (membranePotential > 0)
+        {
+            membranePotential -= 20 * Time.deltaTime;
+            membranePotential = membranePotential < 0 ? 0 : membranePotential;
+        }
+    }
+
     //propagate signal to output axons
     public void PropagateSignalToAxons(int offset)
     {
@@ -15,6 +41,8 @@ public class InputScript : MonoBehaviour, Assets.Scripts.INode
         {
             axon.GetComponent<SynapseScript>().PropagateSpike();
         }
+
+        membranePotential = 10;
     }
 
     //add axon to list
