@@ -15,6 +15,7 @@ public class GameHandler : MonoBehaviour
     public static int OutputNeurons = 10;
 
     public const float TickSpeed = 1000F;
+    public static float time = 0;
 
     //visualizer data
     private const float originalHeight = 45;
@@ -22,12 +23,15 @@ public class GameHandler : MonoBehaviour
     //start
     void Start()
     {
-        
     }
 
     //update
     void Update()
     {
+        time += (Time.deltaTime * 1000);
+        if (time >= TickSpeed + 25)
+            time = 0;
+
         if (brainOrigin != null && brainOrigin.GetComponent<NeuralNetwork>() != null)
         {
             NeuralNetwork brain = brainOrigin.GetComponent<NeuralNetwork>();

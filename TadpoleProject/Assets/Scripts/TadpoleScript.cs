@@ -16,10 +16,14 @@ public class TadpoleScript : MonoBehaviour
     private float raycastRange = 30;
     private float degreesOfSeparation = 0.1F;
 
+    //brain
+    private NeuralNetwork brain;
+
     //start
     void Start()
     {
-
+        //get brain
+        brain = GameObject.Find("BrainOrigin").GetComponent<NeuralNetwork>();
     }
 
     //update
@@ -27,6 +31,12 @@ public class TadpoleScript : MonoBehaviour
     {
         //get tadpole inputs from raycaster
         float[] inputs = fetchInputsFromRayCaster();
+
+        //propagate ray data into input neurons
+        for (int i = 0; i < inputs.Length; i++)
+        {
+            brain.inputNeurons[i].GetComponent<InputScript>().firingRate = (Mathf.Min(inputs[i], raycastRange) / raycastRange);
+        }
 
         //tail motor control
         for (int i = 0; i < 5; i++)

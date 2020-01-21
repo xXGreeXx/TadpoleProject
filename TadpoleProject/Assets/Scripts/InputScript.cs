@@ -8,24 +8,23 @@ public class InputScript : MonoBehaviour, Assets.Scripts.INode
     public List<GameObject> outputAxons = new List<GameObject>();
     private List<GameObject> neighbors = new List<GameObject>();
 
-    private float time = 0;
-    private float firingRate = 1;
+    private int fireCount = 0;
 
+    public float firingRate = 1;
     public float membranePotential = 0;
 
     //update
     void Update()
     {
-        time += (Time.deltaTime * 1000);
+        float t = (GameHandler.time / GameHandler.TickSpeed);
 
-        float t = (time / GameHandler.TickSpeed);
-
-        if (t >= firingRate)
+        if (t >= firingRate && fireCount < 1F / firingRate)
         {
             PropagateSignalToAxons(0);
-
-            time = 0;
+            fireCount++;
         }
+        if (t == 0)
+            fireCount = 0;
 
         if (membranePotential > 0)
         {
