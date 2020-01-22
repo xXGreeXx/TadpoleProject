@@ -27,10 +27,10 @@ public class SpikeScript : MonoBehaviour
 
         if (t >= 1)
         {
-            //if (postSynapticObject.GetComponent<Neuron>() != null)
-            //    postSynapticObject.GetComponent<Neuron>().PropagateSignalToAxons(0);
-            //else
-            //    postSynapticObject.transform.parent.GetComponent<AccumulatorScript>().AddSpike();
+            if (postSynapticObject.GetComponent<Neuron>() != null)
+                postSynapticObject.GetComponent<Neuron>().membranePotential += GameHandler.Spike_Value;
+            else
+                postSynapticObject.GetComponent<OutputScript>().potential = GameHandler.Spike_Value;
 
 
             Destroy(this.gameObject);

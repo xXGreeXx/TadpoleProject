@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class OutputScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //globals
+    public float potential = 0;
 
-    // Update is called once per frame
+    //Update
     void Update()
     {
-        
+        if(potential > 0)
+        {
+            potential -= Time.deltaTime * GameHandler.Output_Decay;
+            potential = Mathf.Max(potential, 0);
+        }
     }
 }

@@ -8,6 +8,10 @@ public class Neuron : MonoBehaviour, Assets.Scripts.INode
     public List<GameObject> outputAxons = new List<GameObject>();
     private List<GameObject> neighbors = new List<GameObject>();
 
+    //neuron data
+    public float membranePotential = 0;
+    public float threshold = 5;
+
     //start
     void Start()
     {
@@ -17,7 +21,11 @@ public class Neuron : MonoBehaviour, Assets.Scripts.INode
     //update
     void Update()
     {
-        
+        if (membranePotential > threshold)
+        {
+            PropagateSignalToAxons(0);
+            membranePotential = 0;
+        }   
     }
 
     //add axon to list
