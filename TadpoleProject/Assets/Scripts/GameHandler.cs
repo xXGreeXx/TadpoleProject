@@ -6,6 +6,7 @@ public class GameHandler : MonoBehaviour
 {
     //objects listed in editor
     public GameObject[] inputFields;
+    public GameObject[] outputFields;
     public GameObject brainOrigin;
 
     //global neural network data
@@ -15,7 +16,7 @@ public class GameHandler : MonoBehaviour
     public static int OutputNeurons = 10;
 
     public const float TickSpeed = 1000F;
-    public static float time = 0;
+    public static float time = 0; //EVERYTHING THAT USES THIS VARIABLE MUST BE IN FIXEDUPDATE
 
     //visualizer data
     private const float originalHeight = 45;
@@ -23,10 +24,11 @@ public class GameHandler : MonoBehaviour
     //start
     void Start()
     {
+
     }
 
     //update
-    void Update()
+    void FixedUpdate()
     {
         time += (Time.deltaTime * 1000);
         if (time >= TickSpeed + 25)

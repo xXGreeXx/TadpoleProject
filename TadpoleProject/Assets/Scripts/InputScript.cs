@@ -13,8 +13,8 @@ public class InputScript : MonoBehaviour, Assets.Scripts.INode
     public float firingRate = 1;
     public float membranePotential = 0;
 
-    //update
-    void Update()
+    //update (occurs after gamehandler)
+    void FixedUpdate()
     {
         float t = (GameHandler.time / GameHandler.TickSpeed);
 
