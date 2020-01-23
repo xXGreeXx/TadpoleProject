@@ -28,7 +28,10 @@ public class SpikeScript : MonoBehaviour
         if (t >= 1)
         {
             if (postSynapticObject.GetComponent<Neuron>() != null)
-                postSynapticObject.GetComponent<Neuron>().SodiumCount += 5;
+            {
+                if (!postSynapticObject.GetComponent<Neuron>().Refractory)
+                    postSynapticObject.GetComponent<Neuron>().SodiumCount += 15;
+            }
             else
                 postSynapticObject.GetComponent<OutputScript>().potential = GameHandler.Spike_Value;
 

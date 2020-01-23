@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Grapher : MonoBehaviour
 {
-    public static void GraphToPanel(GameObject panel, float[] data, GameObject prefab)
+    public static void GraphToPanel(GameObject panel, float[] data, GameObject prefab, float max, float offset)
     {
         //calculate scale factors
         RectTransform transform = panel.GetComponent<RectTransform>();
@@ -12,7 +12,6 @@ public class Grapher : MonoBehaviour
         float width = transform.rect.width;
         float height = transform.rect.height;
 
-        float max = data.Max();
         int length = data.Length;
 
         float widthScaleFactor = (width * 2) / (float)length / 2;
@@ -21,8 +20,8 @@ public class Grapher : MonoBehaviour
         int idx = 0;
         foreach (int dataPoint in data)
         {
-            Vector2 currentPoint = new Vector2((widthScaleFactor * idx) - (width / 2F) + widthScaleFactor, (heightScaleFactor * data[idx]) - (height / 2F));
-            Vector2 nextPoint = (idx + 1 < data.Length ? new Vector2((widthScaleFactor * (idx + 1)) - (width / 2F) + widthScaleFactor, (heightScaleFactor * data[idx + 1]) - (height / 2F)) : currentPoint);
+            Vector2 currentPoint = new Vector2((widthScaleFactor * idx) - (width / 2F) + widthScaleFactor, (heightScaleFactor * data[idx]) - (height / 2F) + offset);
+            Vector2 nextPoint = (idx + 1 < data.Length ? new Vector2((widthScaleFactor * (idx + 1)) - (width / 2F) + widthScaleFactor, (heightScaleFactor * data[idx + 1]) - (height / 2F) + offset) : currentPoint);
 
             GameObject dataPointObject = new GameObject();
             dataPointObject.name = "Data: " + idx;

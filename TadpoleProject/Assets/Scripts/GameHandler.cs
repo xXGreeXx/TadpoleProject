@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GameHandler : MonoBehaviour
 {
@@ -20,8 +21,8 @@ public class GameHandler : MonoBehaviour
     //global settings
     public const float Spike_Value = 1;
     public const float Output_Decay = 2F;
-    public const int SodiumInfluxRate = 10;
-    public const int PotassiumOutfluxRate = 10;
+    public const int SodiumInfluxRate = 50;
+    public const int PotassiumOutfluxRate = 50;
 
     //global neural network data
     public static int HiddenNeuronCount = 100;
@@ -35,7 +36,11 @@ public class GameHandler : MonoBehaviour
 
     //visualizer data
     private const float originalHeight = 45;
-    private float[] lead1 = new float[50];
+    private float[] lead1 = new float[100];
+    private float[] lead2 = new float[100];
+    private float[] lead3 = new float[100];
+    private float[] lead4 = new float[100];
+    private float[] lead5 = new float[100];
     private int idx = 0;
 
     //start
@@ -43,7 +48,13 @@ public class GameHandler : MonoBehaviour
     {
         //set all leads to zero
         for (int i = 0; i < lead1.Length; i++)
-            lead1[i] = 0;
+        {
+            lead1[i] = -70;
+            lead2[i] = -70;
+            lead3[i] = -70;
+            lead4[i] = -70;
+            lead5[i] = -70;
+        }
     }
 
     //update
@@ -51,17 +62,21 @@ public class GameHandler : MonoBehaviour
     {
         //main clock
         time += (Time.deltaTime * 1000);
-        if (time >= TickSpeed + 25)
+        if (time >= TickSpeed + 5)
         {
             time = 0;
         }
 
-        //visualize leads every 20 internal cycles
-        if (time % 30 == 0)
+        //visualize leads
+        if (time % 25 == 0)
         {
             if (idx < lead1.Length)
             {
-                lead1[idx] = brainOrigin.GetComponent<NeuralNetwork>().inputNeurons[0].GetComponent<InputScript>().membranePotential;
+                lead1[idx] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[0].GetComponent<Neuron>().MembranePotential;
+                lead2[idx] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[1].GetComponent<Neuron>().MembranePotential;
+                lead3[idx] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[2].GetComponent<Neuron>().MembranePotential;
+                lead4[idx] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[3].GetComponent<Neuron>().MembranePotential;
+                lead5[idx] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[4].GetComponent<Neuron>().MembranePotential;
                 idx++;
             }
             else
@@ -69,12 +84,32 @@ public class GameHandler : MonoBehaviour
                 for (int idx = 1; idx < lead1.Length; idx++)
                 {
                     lead1[idx - 1] = lead1[idx];
+                    lead2[idx - 1] = lead2[idx];
+                    lead3[idx - 1] = lead3[idx];
+                    lead4[idx - 1] = lead4[idx];
+                    lead5[idx - 1] = lead5[idx];
                 }
-                lead1[lead1.Length - 1] = brainOrigin.GetComponent<NeuralNetwork>().inputNeurons[0].GetComponent<InputScript>().membranePotential;
+                lead1[lead1.Length - 1] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[0].GetComponent<Neuron>().MembranePotential;
+                lead2[lead1.Length - 1] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[1].GetComponent<Neuron>().MembranePotential;
+                lead3[lead1.Length - 1] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[2].GetComponent<Neuron>().MembranePotential;
+                lead4[lead1.Length - 1] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[3].GetComponent<Neuron>().MembranePotential;
+                lead5[lead1.Length - 1] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[4].GetComponent<Neuron>().MembranePotential;
             }
 
             Grapher.ClearGraph(graph1);
-            Grapher.GraphToPanel(graph1, lead1, linePrefab);
+            Grapher.GraphToPanel(graph1, lead1, linePrefab, lead1.Max(x => x + 200), 50);
+
+            Grapher.ClearGraph(graph2);
+            Grapher.GraphToPanel(graph2, lead2, linePrefab, lead2.Max(x => x + 200), 50);
+
+            Grapher.ClearGraph(graph3);
+            Grapher.GraphToPanel(graph3, lead3, linePrefab, lead3.Max(x => x + 200), 50);
+
+            Grapher.ClearGraph(graph4);
+            Grapher.GraphToPanel(graph4, lead4, linePrefab, lead4.Max(x => x + 200), 50);
+
+            Grapher.ClearGraph(graph5);
+            Grapher.GraphToPanel(graph5, lead5, linePrefab, lead5.Max(x => x + 200), 50);
         }
 
         //visualize inputs and outputs
