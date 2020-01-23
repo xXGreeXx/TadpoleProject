@@ -14,7 +14,7 @@ public class GameHandler : MonoBehaviour
     public const float Output_Decay = 2F;
 
     //global neural network data
-    public static int HiddenNeuronCount = 30;
+    public static int HiddenNeuronCount = 100;
     public static int Size = 100;
     public static int InputNeurons = 10;
     public static int OutputNeurons = 10;

@@ -10,7 +10,7 @@ public class Neuron : MonoBehaviour, Assets.Scripts.INode
 
     //neuron data
     public float membranePotential = 0;
-    public float threshold = 5;
+    public float threshold = 2;
 
     //start
     void Start()

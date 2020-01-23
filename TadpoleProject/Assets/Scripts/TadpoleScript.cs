@@ -8,10 +8,6 @@ public class TadpoleScript : MonoBehaviour
     public GameObject[] tailObjects;
     public GameObject[] lineObjects;
 
-    //data for tail movement
-    private float[] speeds = { 0, 0, 0, 0, 0 };
-    private bool[] switchs = { false, false, false, false, false };
-
     //raycast data
     private float raycastRange = 30;
     private float degreesOfSeparation = 0.1F;
@@ -38,22 +34,40 @@ public class TadpoleScript : MonoBehaviour
             brain.inputNeurons[i].GetComponent<InputScript>().firingRate = (Mathf.Min(inputs[i], raycastRange) / raycastRange);
         }
 
+        //fetch outputs and calculate deltas
+        float[] outputs = new float[brain.outputNeurons.Count];
+        for (int i = 0; i < brain.outputNeurons.Count; i++)
+        {
+            outputs[i] = brain.outputNeurons[i].GetComponent<OutputScript>().potential;
+        }
+        float[] deltas = new float[outputs.Length / 2];
+
+        for (int i = 0; i < outputs.Length; i += 2)
+        {
+            deltas[i / 2] = outputs[i] - outputs[i + 1];
+        }
+
         //tail motor control
         for (int i = 0; i < 5; i++)
         {
-            JointMotor2D motor = tailObjects[i].GetComponent<HingeJoint2D>().motor;
-            motor.motorSpeed = (switchs[i] ? -1 : 1) * 100;
-            tailObjects[i].GetComponent<HingeJoint2D>().motor = motor;
-            tailObjects[i].GetComponent<ConstantForce2D>().relativeForce = new Vector2(0, Mathf.Abs(motor.motorSpeed) * 15 * (5F / (float)(i + 1F)));
+            HingeJoint2D joint = tailObjects[i].GetComponent<HingeJoint2D>();
 
-            speeds[i] += switchs[i] ? -1 : 1;
+            JointMotor2D motor = joint.motor;
+            motor.motorSpeed = deltas[i] * 300;
 
-            switchs[i] = Input.GetKey(KeyCode.A);
+            if (joint.jointAngle > joint.limits.min && joint.jointAngle < joint.limits.max)
+            {
+                tailObjects[i].GetComponent<ConstantForce2D>().relativeForce = new Vector2(0, Mathf.Abs(motor.motorSpeed) * 5 * (5F / (float)(i + 1F)));
+            }
+            else
+            {
+                tailObjects[i].GetComponent<ConstantForce2D>().relativeForce = Vector2.zero;
 
-            //if (speeds[i] >= 20)
-            //    switchs[i] = true;
-            //else if (speeds[i] <= -60)
-            //    switchs[i] = false;
+                if (motor.motorSpeed == 0) //TODO\\ change this?
+                    motor.motorSpeed = joint.jointAngle < 0 ? 30 : -30;
+            }
+
+            joint.motor = motor;
         }
     }
 
