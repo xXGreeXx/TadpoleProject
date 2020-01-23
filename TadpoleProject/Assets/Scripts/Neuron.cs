@@ -9,8 +9,16 @@ public class Neuron : MonoBehaviour, Assets.Scripts.INode
     private List<GameObject> neighbors = new List<GameObject>();
 
     //neuron data
-    public float membranePotential = 0;
-    public float threshold = 2;
+    public int PotassiumCount = 130;
+    public int SodiumCount = 0;
+    public int ChlorideCount = 200;
+    public float MembranePotential { get { return PotassiumCount + SodiumCount - ChlorideCount; } }
+
+    public float SodiumGateActivation = -55;
+    public float PotassiumGateActivation = 40;
+
+    public bool SodiumGateOpen = false;
+    public bool PotassiumGateOpen = false;
 
     //start
     void Start()
@@ -21,11 +29,29 @@ public class Neuron : MonoBehaviour, Assets.Scripts.INode
     //update
     void Update()
     {
-        if (membranePotential > threshold)
+        //bring sodium and potassium into the cell
+        if(SodiumGateOpen)
         {
-            PropagateSignalToAxons(0);
-            membranePotential = 0;
-        }   
+            SodiumCount += GameHandler.SodiumInfluxRate;
+        }
+        if (PotassiumGateOpen)
+        {
+            PotassiumCount -= GameHandler.PotassiumOutfluxRate;
+        }
+
+        //activate sodium gates to create action potential
+        if (MembranePotential > SodiumGateActivation)
+        {
+            //PropagateSignalToAxons(0);
+            SodiumGateOpen = true;
+        }
+
+        //deactive sodium gate and activate potassium gate
+        if (MembranePotential > PotassiumGateActivation)
+        {
+            PotassiumGateOpen = true;
+            SodiumGateOpen = false;
+        }
     }
 
     //add axon to list
