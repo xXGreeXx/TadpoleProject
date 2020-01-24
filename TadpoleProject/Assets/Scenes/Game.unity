@@ -2074,7 +2074,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -309.99997, y: 207.5}
+  m_AnchoredPosition: {x: -312.78, y: 207.5}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &508567554
@@ -2285,7 +2285,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -5.0594482}
+  m_ConnectedAnchor: {x: 0, y: -5.0594506}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
@@ -2533,7 +2533,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -5.059457}
+  m_ConnectedAnchor: {x: 0, y: -5.059455}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
@@ -4446,7 +4446,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -5.0594482}
+  m_ConnectedAnchor: {x: 0, y: -5.0594506}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
@@ -5254,7 +5254,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -333.31, y: -17.501}
+  m_AnchoredPosition: {x: -333.31, y: -17.501007}
   m_SizeDelta: {x: -678.96, y: -68.703}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1229485058
@@ -6789,7 +6789,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -5.0594435}
+  m_ConnectedAnchor: {x: 0, y: -5.059446}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
@@ -9332,7 +9332,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -11.209447}
+  m_ConnectedAnchor: {x: 0, y: -11.209443}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0

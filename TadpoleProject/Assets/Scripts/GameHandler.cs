@@ -24,6 +24,10 @@ public class GameHandler : MonoBehaviour
     public const int SodiumInfluxRate = 50;
     public const int PotassiumOutfluxRate = 50;
 
+    public const int BasePotassiumCount = 180;
+    public const int BaseSodiumCount = 0;
+    public const int BaseChlorideCount = 250;
+
     //global neural network data
     public static int HiddenNeuronCount = 100;
     public static int Size = 100;
@@ -36,12 +40,13 @@ public class GameHandler : MonoBehaviour
 
     //visualizer data
     private const float originalHeight = 45;
-    private float[] lead1 = new float[100];
-    private float[] lead2 = new float[100];
-    private float[] lead3 = new float[100];
-    private float[] lead4 = new float[100];
-    private float[] lead5 = new float[100];
+    private float[] lead1 = new float[75];
+    private float[] lead2 = new float[75];
+    private float[] lead3 = new float[75];
+    private float[] lead4 = new float[75];
+    private float[] lead5 = new float[75];
     private int idx = 0;
+    private float readTime = 0;
 
     //start
     void Start()
@@ -62,13 +67,14 @@ public class GameHandler : MonoBehaviour
     {
         //main clock
         time += (Time.deltaTime * 1000);
+        readTime += Time.deltaTime * 1000;
         if (time >= TickSpeed + 5)
         {
             time = 0;
         }
 
         //visualize leads
-        if (time % 25 == 0)
+        if (readTime >= 25)
         {
             if (idx < lead1.Length)
             {
@@ -97,19 +103,21 @@ public class GameHandler : MonoBehaviour
             }
 
             Grapher.ClearGraph(graph1);
-            Grapher.GraphToPanel(graph1, lead1, linePrefab, lead1.Max(x => x + 200), 50);
+            Grapher.GraphToPanel(graph1, lead1, linePrefab, lead1.Max(x => x + 300), 50);
 
             Grapher.ClearGraph(graph2);
-            Grapher.GraphToPanel(graph2, lead2, linePrefab, lead2.Max(x => x + 200), 50);
+            Grapher.GraphToPanel(graph2, lead2, linePrefab, lead2.Max(x => x + 300), 50);
 
             Grapher.ClearGraph(graph3);
-            Grapher.GraphToPanel(graph3, lead3, linePrefab, lead3.Max(x => x + 200), 50);
+            Grapher.GraphToPanel(graph3, lead3, linePrefab, lead3.Max(x => x + 300), 50);
 
             Grapher.ClearGraph(graph4);
-            Grapher.GraphToPanel(graph4, lead4, linePrefab, lead4.Max(x => x + 200), 50);
+            Grapher.GraphToPanel(graph4, lead4, linePrefab, lead4.Max(x => x + 300), 50);
 
             Grapher.ClearGraph(graph5);
-            Grapher.GraphToPanel(graph5, lead5, linePrefab, lead5.Max(x => x + 200), 50);
+            Grapher.GraphToPanel(graph5, lead5, linePrefab, lead5.Max(x => x + 300), 50);
+
+            readTime = 0;
         }
 
         //visualize inputs and outputs

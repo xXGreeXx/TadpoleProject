@@ -9,9 +9,9 @@ public class Neuron : MonoBehaviour, Assets.Scripts.INode
     private List<GameObject> neighbors = new List<GameObject>();
 
     //neuron data
-    public int PotassiumCount = 130;
-    public int SodiumCount = 0;
-    public int ChlorideCount = 200;
+    public int PotassiumCount = GameHandler.BasePotassiumCount;
+    public int SodiumCount = GameHandler.BaseSodiumCount;
+    public int ChlorideCount = GameHandler.BaseChlorideCount;
     public float MembranePotential { get { return PotassiumCount + SodiumCount - ChlorideCount; } }
 
     public float SodiumGateActivation = -55;
@@ -41,16 +41,19 @@ public class Neuron : MonoBehaviour, Assets.Scripts.INode
         }
         if (Refractory)
         {
-            PotassiumCount += 2;
-            SodiumCount -= 3;
+            PotassiumCount += 6;
+            SodiumCount -= 9;
 
             if (SodiumCount <= 0)
             {
                 SodiumCount = 0;
 
-                if (PotassiumCount <= 130)
+                if (PotassiumCount <= GameHandler.BasePotassiumCount)
                 {
-                    PotassiumCount++;
+                    PotassiumCount += 5;
+
+                    if (PotassiumCount > GameHandler.BasePotassiumCount)
+                        PotassiumCount = GameHandler.BasePotassiumCount;
                 }
                 else
                     Refractory = false;

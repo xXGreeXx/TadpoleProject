@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class Grapher : MonoBehaviour
 {
+    private static Material material;
+
     public static void GraphToPanel(GameObject panel, float[] data, GameObject prefab, float max, float offset)
     {
+        if(material == null)
+        {
+            material = new Material(Shader.Find("Unlit/Color"));
+            material.color = Color.black;
+        }
+
         //calculate scale factors
         RectTransform transform = panel.GetComponent<RectTransform>();
 
@@ -32,6 +40,7 @@ public class Grapher : MonoBehaviour
             renderer.endWidth = 0.5F;
             renderer.startColor = Color.black;
             renderer.endColor = Color.black;
+            renderer.material = material;
 
             Vector3 newPosA = panel.transform.TransformPoint(currentPoint);
             newPosA.z -= 1;
