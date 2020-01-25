@@ -97,7 +97,7 @@ public class NeuralNetwork : MonoBehaviour
         }
 
         //create synapses
-        for (int idx = 0; idx < 400; idx++)
+        for (int idx = 0; idx < 500; idx++)
         {
             GameObject preSynapticNeuron = allNeurons.Except(outputNeurons).ToList()[Random.Range(0, allNeurons.Except(outputNeurons).ToList().Count)];
             INode preSynapticNeuronScript = (preSynapticNeuron.GetComponent<Neuron>() != null ? (INode)preSynapticNeuron.GetComponent<Neuron>() : (preSynapticNeuron.GetComponent<InputScript>() != null ? (INode)preSynapticNeuron.GetComponent<InputScript>() : null));

@@ -17,6 +17,12 @@ public class GameHandler : MonoBehaviour
     public GameObject graph4;
     public GameObject graph5;
 
+    public GameObject lead1Object;
+    public GameObject lead2Object;
+    public GameObject lead3Object;
+    public GameObject lead4Object;
+    public GameObject lead5Object;
+
     public GameObject foodPrefab;
 
     //global settings
@@ -30,7 +36,7 @@ public class GameHandler : MonoBehaviour
     public const int BaseChlorideCount = 250;
 
     //global neural network data
-    public static int HiddenNeuronCount = 100;
+    public static int HiddenNeuronCount = 300;
     public static int Size = 100;
     public static int InputNeurons = 10;
     public static int OutputNeurons = 10;
@@ -108,11 +114,11 @@ public class GameHandler : MonoBehaviour
         {
             if (idx < lead1.Length)
             {
-                lead1[idx] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[0].GetComponent<Neuron>().MembranePotential;
-                lead2[idx] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[1].GetComponent<Neuron>().MembranePotential;
-                lead3[idx] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[2].GetComponent<Neuron>().MembranePotential;
-                lead4[idx] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[3].GetComponent<Neuron>().MembranePotential;
-                lead5[idx] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[4].GetComponent<Neuron>().MembranePotential;
+                lead1[idx] = CalculateLead(lead1Object);
+                lead2[idx] = CalculateLead(lead2Object);
+                lead3[idx] = CalculateLead(lead3Object);
+                lead4[idx] = CalculateLead(lead4Object);
+                lead5[idx] = CalculateLead(lead5Object);
                 idx++;
             }
             else
@@ -125,11 +131,11 @@ public class GameHandler : MonoBehaviour
                     lead4[idx - 1] = lead4[idx];
                     lead5[idx - 1] = lead5[idx];
                 }
-                lead1[lead1.Length - 1] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[0].GetComponent<Neuron>().MembranePotential;
-                lead2[lead1.Length - 1] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[1].GetComponent<Neuron>().MembranePotential;
-                lead3[lead1.Length - 1] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[2].GetComponent<Neuron>().MembranePotential;
-                lead4[lead1.Length - 1] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[3].GetComponent<Neuron>().MembranePotential;
-                lead5[lead1.Length - 1] = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons[4].GetComponent<Neuron>().MembranePotential;
+                lead1[lead1.Length - 1] = CalculateLead(lead1Object);
+                lead2[lead1.Length - 1] = CalculateLead(lead2Object);
+                lead3[lead1.Length - 1] = CalculateLead(lead3Object);
+                lead4[lead1.Length - 1] = CalculateLead(lead4Object);
+                lead5[lead1.Length - 1] = CalculateLead(lead5Object);
             }
 
             Grapher.ClearGraph(graph1);
@@ -171,5 +177,20 @@ public class GameHandler : MonoBehaviour
                 idx++;
             }
         }
+    }
+
+    //calculate lead data
+    private float CalculateLead(GameObject lead)
+    {
+        float averagePotential = 0;
+
+        float max = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons.Max(x => Vector3.Distance(x.transform.position, lead.transform.position));
+        foreach (GameObject neuron in brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons)
+        {
+            averagePotential += neuron.GetComponent<Neuron>().MembranePotential * (1 - (Vector3.Distance(lead.transform.position, neuron.transform.position) / max));
+        }
+        averagePotential /= brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons.Count;
+
+        return averagePotential;
     }
 }

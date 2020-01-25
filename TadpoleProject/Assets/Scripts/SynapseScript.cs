@@ -58,7 +58,8 @@ public class SynapseScript : MonoBehaviour
         script.postSynapticObject = postSynapticNeuron;
         script.delayCycles = 0.5F; //TODO\\ change this too
         script.weight = weight - fatigue; //TODO\\ use vesicle data to calculate this
+        script.type = type;
 
-        fatigue += 0.5F;
+        //fatigue += 0.5F; //TODO\\ change this
     }
 }
