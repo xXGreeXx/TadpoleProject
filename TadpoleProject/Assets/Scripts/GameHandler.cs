@@ -9,6 +9,7 @@ public class GameHandler : MonoBehaviour
     public GameObject[] inputFields;
     public GameObject[] outputFields;
     public GameObject brainOrigin;
+    public GameObject GamePanel;
 
     public GameObject graph1;
     public GameObject graph2;
@@ -16,7 +17,7 @@ public class GameHandler : MonoBehaviour
     public GameObject graph4;
     public GameObject graph5;
 
-    public GameObject linePrefab;
+    public GameObject foodPrefab;
 
     //global settings
     public const float Spike_Value = 1;
@@ -38,6 +39,10 @@ public class GameHandler : MonoBehaviour
     public const float TickSpeed = 500F;
     public static float time = 0; //EVERYTHING THAT USES THIS VARIABLE MUST BE IN FIXEDUPDATE
 
+    //game data
+    public static List<GameObject> food = new List<GameObject>();
+    public const int FoodCount = 30;
+
     //visualizer data
     private const float originalHeight = 45;
     private float[] lead1 = new float[75];
@@ -47,6 +52,14 @@ public class GameHandler : MonoBehaviour
     private float[] lead5 = new float[75];
     private int idx = 0;
     private float readTime = 0;
+
+    //enums
+    public enum SynapseType
+    {
+        Excitatory,
+        Inhibitory,
+        Modulatory
+    }
 
     //start
     void Start()
@@ -60,6 +73,23 @@ public class GameHandler : MonoBehaviour
             lead4[i] = -70;
             lead5[i] = -70;
         }
+
+        //spawn food
+        for (int i = 0; i < FoodCount; i++)
+        {
+            CreateFoodObject();
+        }
+    }
+
+    //spawn food
+    private void CreateFoodObject()
+    {
+        GameObject foodObject = GameObject.Instantiate(foodPrefab);
+        foodObject.transform.SetParent(GamePanel.transform);
+
+        foodObject.transform.localScale = Vector3.one;
+        foodObject.name = "Food";
+        foodObject.transform.localPosition = new Vector2(Random.Range(-575, 575), Random.Range(-500, 500));
     }
 
     //update
@@ -103,19 +133,19 @@ public class GameHandler : MonoBehaviour
             }
 
             Grapher.ClearGraph(graph1);
-            Grapher.GraphToPanel(graph1, lead1, linePrefab, lead1.Max(x => x + 300), 50);
+            Grapher.GraphToPanel(graph1, lead1, lead1.Max(x => x + 300), 50);
 
             Grapher.ClearGraph(graph2);
-            Grapher.GraphToPanel(graph2, lead2, linePrefab, lead2.Max(x => x + 300), 50);
+            Grapher.GraphToPanel(graph2, lead2, lead2.Max(x => x + 300), 50);
 
             Grapher.ClearGraph(graph3);
-            Grapher.GraphToPanel(graph3, lead3, linePrefab, lead3.Max(x => x + 300), 50);
+            Grapher.GraphToPanel(graph3, lead3, lead3.Max(x => x + 300), 50);
 
             Grapher.ClearGraph(graph4);
-            Grapher.GraphToPanel(graph4, lead4, linePrefab, lead4.Max(x => x + 300), 50);
+            Grapher.GraphToPanel(graph4, lead4, lead4.Max(x => x + 300), 50);
 
             Grapher.ClearGraph(graph5);
-            Grapher.GraphToPanel(graph5, lead5, linePrefab, lead5.Max(x => x + 300), 50);
+            Grapher.GraphToPanel(graph5, lead5, lead5.Max(x => x + 300), 50);
 
             readTime = 0;
         }

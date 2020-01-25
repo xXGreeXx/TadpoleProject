@@ -5,21 +5,23 @@ using UnityEngine;
 public class Neuron : MonoBehaviour, Assets.Scripts.INode
 {
     //globals
-    public List<GameObject> outputAxons = new List<GameObject>();
-    private List<GameObject> neighbors = new List<GameObject>();
+    public List<GameObject> outputAxons = new List<GameObject>(); //axons that receive signals from this neuron
+    private List<GameObject> neighbors = new List<GameObject>(); //neurons that this neuron CAN link to during synaptogenesis
 
     //neuron data
-    public int PotassiumCount = GameHandler.BasePotassiumCount;
-    public int SodiumCount = GameHandler.BaseSodiumCount;
-    public int ChlorideCount = GameHandler.BaseChlorideCount;
-    public float MembranePotential { get { return PotassiumCount + SodiumCount - ChlorideCount; } }
+    public int PotassiumCount = GameHandler.BasePotassiumCount; //flows out of membrane
+    public int SodiumCount = GameHandler.BaseSodiumCount; //flows into membrane
+    public int ChlorideCount = GameHandler.BaseChlorideCount; //constant in membrane
+    public int ModulatorCount = 0; //secondary messenger that modulates threshold value
 
-    public float SodiumGateActivation = -55;
-    public float PotassiumGateActivation = 40;
+    public float MembranePotential { get { return PotassiumCount + SodiumCount - ChlorideCount; } } //calculate membrane potential
 
-    public bool SodiumGateOpen = false;
-    public bool PotassiumGateOpen = false;
-    public bool Refractory = false;
+    public float SodiumGateActivation = -55; //mV that activates sodium gates
+    public float PotassiumGateActivation = 40; //mV that activates potassium gates
+
+    public bool SodiumGateOpen = false; //when this is true, sodium floods into cell causing mV to rise
+    public bool PotassiumGateOpen = false; //when this is true, potassium floods out of cell causing mV to fall
+    public bool Refractory = false; //when this is true, Na+/K+ ATPase pumps activate to bring sodium out of the cell and potassium into the cell. Potassium leak gates also open
 
     //start
     void Start()
@@ -30,6 +32,14 @@ public class Neuron : MonoBehaviour, Assets.Scripts.INode
     //update
     void Update()
     {
+        //drain secondary messengers
+        if (ModulatorCount > 0)
+        {
+            ModulatorCount--;
+
+            ModulatorCount = Mathf.Max(ModulatorCount, 0);
+        }
+
         //bring sodium and potassium into the cell
         if(SodiumGateOpen)
         {
@@ -41,8 +51,8 @@ public class Neuron : MonoBehaviour, Assets.Scripts.INode
         }
         if (Refractory)
         {
-            PotassiumCount += 6;
-            SodiumCount -= 9;
+            PotassiumCount += 12;
+            SodiumCount -= 18;
 
             if (SodiumCount <= 0)
             {
@@ -60,6 +70,12 @@ public class Neuron : MonoBehaviour, Assets.Scripts.INode
             }
         }
 
+        //leak sodium out of the cell
+        if (!SodiumGateOpen && SodiumCount > 0)
+        {
+            SodiumCount -= 1;
+        }
+
         //after all potassium is out of the cell, then start pumping it back in
         if (PotassiumCount <= 0)
         {
@@ -69,7 +85,7 @@ public class Neuron : MonoBehaviour, Assets.Scripts.INode
         }
 
         //activate sodium gates to create action potential
-        if (MembranePotential >= SodiumGateActivation && !Refractory && !PotassiumGateOpen)
+        if (MembranePotential >= (SodiumGateActivation - ModulatorCount) && !Refractory && !PotassiumGateOpen)
         {
             SodiumGateOpen = true;
         }

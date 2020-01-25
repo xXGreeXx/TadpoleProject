@@ -4,11 +4,42 @@ using UnityEngine;
 
 public class SynapseScript : MonoBehaviour
 {
+    //globals
     public float weight;
+    public float fatigue = 0; //synaptic fatigue
     public float delay;
+    public GameHandler.SynapseType type;
 
     public GameObject preSynapticNeuron;
     public GameObject postSynapticNeuron;
+
+    void FixedUpdate()
+    {
+        //vesicle modulation
+        if (fatigue > 0)
+        {
+            fatigue -= Time.deltaTime;
+            fatigue = Mathf.Max(fatigue, 0);
+        }
+
+        //STDP
+        if (postSynapticNeuron.GetComponent<Neuron>() == null || preSynapticNeuron.GetComponent<Neuron>() == null) //don't do STDP on output synapses or input synapses
+            return;
+
+        if (postSynapticNeuron.GetComponent<Neuron>().PotassiumGateOpen)
+        {
+            if (preSynapticNeuron.GetComponent<Neuron>().PotassiumGateOpen)
+                weight += 0.1F;
+            else
+                weight -= 0.1F;
+
+            if (weight <= 0)
+            {
+                preSynapticNeuron.GetComponent<Neuron>().outputAxons.Remove(this.gameObject);
+                Destroy(this.gameObject);
+            }
+        }
+    }
 
     //propagate data onto synapse
     public void PropagateSpike()
@@ -26,6 +57,8 @@ public class SynapseScript : MonoBehaviour
         script.startPosition = preSynapticNeuron.transform.position;
         script.postSynapticObject = postSynapticNeuron;
         script.delayCycles = 0.5F; //TODO\\ change this too
-        script.weight = 0; //TODO\\ use vesicle data to calculate this
+        script.weight = weight - fatigue; //TODO\\ use vesicle data to calculate this
+
+        fatigue += 0.5F;
     }
 }

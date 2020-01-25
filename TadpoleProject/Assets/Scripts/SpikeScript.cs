@@ -9,8 +9,9 @@ public class SpikeScript : MonoBehaviour
     public GameObject postSynapticObject;
 
     public float delayCycles = 0;
-    private float time = 0;
     public float weight = 0;
+
+    public GameHandler.SynapseType type;
 
     void Start()
     {
@@ -19,9 +20,7 @@ public class SpikeScript : MonoBehaviour
     //update (called once per frame)
     void Update()
     {
-        time += (Time.deltaTime * 1000);
-
-        float t = (time / GameHandler.TickSpeed) / delayCycles;
+        float t = (GameHandler.time / GameHandler.TickSpeed) / delayCycles;
         Vector3 newPos = Vector3.Lerp(startPosition, postSynapticObject.transform.position, t);
         this.transform.position = new Vector3(newPos.x, newPos.y, newPos.z);
 
@@ -30,10 +29,25 @@ public class SpikeScript : MonoBehaviour
             if (postSynapticObject.GetComponent<Neuron>() != null)
             {
                 if (!postSynapticObject.GetComponent<Neuron>().Refractory)
-                    postSynapticObject.GetComponent<Neuron>().SodiumCount += 15;
+                {
+                    switch (type)
+                    {
+                        case GameHandler.SynapseType.Excitatory:
+                            postSynapticObject.GetComponent<Neuron>().SodiumCount += Mathf.Max((int)(weight * 15), 0);
+                            break;
+
+                        case GameHandler.SynapseType.Inhibitory:
+                            postSynapticObject.GetComponent<Neuron>().PotassiumCount -= Mathf.Max((int)(weight * 15), 0);
+                            break;
+
+                        case GameHandler.SynapseType.Modulatory:
+                            postSynapticObject.GetComponent<Neuron>().ModulatorCount += Mathf.Max((int)(weight * 15), 0);
+                            break;
+                    }
+                }
             }
             else
-                postSynapticObject.GetComponent<OutputScript>().potential = GameHandler.Spike_Value;
+                postSynapticObject.GetComponent<OutputScript>().potential = 1;
 
 
             Destroy(this.gameObject);

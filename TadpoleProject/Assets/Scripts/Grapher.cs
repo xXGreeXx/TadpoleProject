@@ -6,7 +6,7 @@ public class Grapher : MonoBehaviour
 {
     private static Material material;
 
-    public static void GraphToPanel(GameObject panel, float[] data, GameObject prefab, float max, float offset)
+    public static void GraphToPanel(GameObject panel, float[] data, float max, float offset)
     {
         if(material == null)
         {

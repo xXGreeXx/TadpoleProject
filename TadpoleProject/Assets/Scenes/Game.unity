@@ -2285,7 +2285,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -5.0594506}
+  m_ConnectedAnchor: {x: 0, y: -5.0594482}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
@@ -2533,7 +2533,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -5.059455}
+  m_ConnectedAnchor: {x: 0, y: -5.059457}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
@@ -4446,7 +4446,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -5.0594506}
+  m_ConnectedAnchor: {x: 0, y: -5.0594482}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
@@ -6789,7 +6789,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -5.059446}
+  m_ConnectedAnchor: {x: 0, y: -5.0594435}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0
@@ -7090,12 +7090,15 @@ MonoBehaviour:
   - {fileID: 814476017}
   - {fileID: 1836130026}
   brainOrigin: {fileID: 701743580}
+  GamePanel: {fileID: 1122483851}
   graph1: {fileID: 1147694486}
   graph2: {fileID: 1645726074}
   graph3: {fileID: 1839742624}
   graph4: {fileID: 1807165899}
   graph5: {fileID: 1466599117}
   linePrefab: {fileID: 3153785073989956991, guid: 4066ce6ff741d324d968b98a92169d7e,
+    type: 3}
+  foodPrefab: {fileID: 723118097703487591, guid: 899a9a40be2d57b42928a94005804d0e,
     type: 3}
 --- !u!1 &1576239709
 GameObject:
@@ -9332,7 +9335,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.000008047151, y: 4.9405503}
-  m_ConnectedAnchor: {x: 0, y: -11.209443}
+  m_ConnectedAnchor: {x: 0, y: -11.209447}
   m_UseMotor: 1
   m_Motor:
     m_MotorSpeed: 0

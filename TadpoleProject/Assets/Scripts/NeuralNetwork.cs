@@ -104,6 +104,7 @@ public class NeuralNetwork : MonoBehaviour
             if (preSynapticNeuronScript == null) //don't create outgoing connections from accumulator nodes(output)
                 continue;
 
+            //get data
             GameObject postSynapticNeuron = preSynapticNeuronScript.getNeighbors()[Random.Range(0, preSynapticNeuronScript.getNeighbors().Count)];
 
             GameObject synapsePivot = new GameObject();
@@ -113,6 +114,7 @@ public class NeuralNetwork : MonoBehaviour
 
             float distance = Vector3.Distance(preSynapticNeuron.transform.position, postSynapticNeuron.transform.position);
 
+            //create object
             GameObject s = GameObject.CreatePrimitive(PrimitiveType.Cube);
             s.name = "Synapse";
 
@@ -121,11 +123,15 @@ public class NeuralNetwork : MonoBehaviour
             s.transform.position = synapsePivot.transform.position;
             s.transform.localPosition = new Vector3(0, 0, (distance / 2F));
 
+            //set synapse data
             SynapseScript script = s.AddComponent<SynapseScript>();
             script.preSynapticNeuron = preSynapticNeuron;
             script.postSynapticNeuron = postSynapticNeuron;
             script.delay = 1;
+            script.weight = 1;
+            script.type = GameHandler.SynapseType.Excitatory;
 
+            //rotate synapse
             synapsePivot.transform.LookAt(postSynapticNeuron.transform.position);
 
             preSynapticNeuron.GetComponent<INode>().AddAxon(s);
