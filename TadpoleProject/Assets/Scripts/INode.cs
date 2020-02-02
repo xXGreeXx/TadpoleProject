@@ -18,5 +18,8 @@ namespace Assets.Scripts
 
         //add output axon
         void AddAxon(GameObject axon);
+
+        //get axons
+        List<GameObject> GetAxons();
     }
 }

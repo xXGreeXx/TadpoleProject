@@ -36,10 +36,11 @@ public class GameHandler : MonoBehaviour
     public const int BaseChlorideCount = 250;
 
     //global neural network data
-    public static int HiddenNeuronCount = 100;
+    public static int HiddenNeuronCount = 300;
     public static int Size = 100;
     public static int InputNeurons = 10;
     public static int OutputNeurons = 10;
+    public static int MaxConnectionPerNeuron = 5;
 
     //global simulation data
     public const float TickSpeed = 500F;
@@ -48,6 +49,7 @@ public class GameHandler : MonoBehaviour
     //game data
     public static List<GameObject> food = new List<GameObject>();
     public const int FoodCount = 30;
+    public static NeuralNetwork brain;
 
     //visualizer data
     private const float originalHeight = 45;
@@ -85,6 +87,9 @@ public class GameHandler : MonoBehaviour
         {
             CreateFoodObject();
         }
+
+        //find brain
+        brain = brainOrigin.GetComponent<NeuralNetwork>();
     }
 
     //spawn food
@@ -188,8 +193,11 @@ public class GameHandler : MonoBehaviour
         float max = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons.Max(x => Vector3.Distance(x.transform.position, lead.transform.position));
         foreach (GameObject neuron in brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons)
         {
+            if (Vector3.Distance(lead.transform.position, neuron.transform.position) / max > 0.3F)
+                continue;
+
             averagePotential += neuron.GetComponent<Neuron>().MembranePotential * (1 - (Vector3.Distance(lead.transform.position, neuron.transform.position) / max));
-            count += 1 - (Vector3.Distance(lead.transform.position, neuron.transform.position) / max);
+            count++;
         }
         averagePotential /= count;
 

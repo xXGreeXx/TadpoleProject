@@ -99,42 +99,15 @@ public class NeuralNetwork : MonoBehaviour
         //create synapses
         for (int idx = 0; idx < 0; idx++)
         {
+            //get data
             GameObject preSynapticNeuron = allNeurons.Except(outputNeurons).ToList()[Random.Range(0, allNeurons.Except(outputNeurons).ToList().Count)];
             INode preSynapticNeuronScript = (preSynapticNeuron.GetComponent<Neuron>() != null ? (INode)preSynapticNeuron.GetComponent<Neuron>() : (preSynapticNeuron.GetComponent<InputScript>() != null ? (INode)preSynapticNeuron.GetComponent<InputScript>() : null));
             if (preSynapticNeuronScript == null) //don't create outgoing connections from accumulator nodes(output)
                 continue;
 
-            //get data
             GameObject postSynapticNeuron = preSynapticNeuronScript.getNeighbors()[Random.Range(0, preSynapticNeuronScript.getNeighbors().Count)];
 
-            GameObject synapsePivot = new GameObject();
-            synapsePivot.name = "SynapseHolder";
-            synapsePivot.transform.SetParent(preSynapticNeuron.transform);
-            synapsePivot.transform.position = preSynapticNeuron.transform.position;
-
-            float distance = Vector3.Distance(preSynapticNeuron.transform.position, postSynapticNeuron.transform.position);
-
-            //create object
-            GameObject s = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            s.name = "Synapse";
-
-            s.transform.SetParent(synapsePivot.transform);
-            s.transform.localScale = new Vector3(0.25F, 0.25F, distance);
-            s.transform.position = synapsePivot.transform.position;
-            s.transform.localPosition = new Vector3(0, 0, (distance / 2F));
-
-            //set synapse data
-            SynapseScript script = s.AddComponent<SynapseScript>();
-            script.preSynapticNeuron = preSynapticNeuron;
-            script.postSynapticNeuron = postSynapticNeuron;
-            script.delay = 1;
-            script.weight = 1;
-            script.type = GameHandler.SynapseType.Excitatory;
-
-            //rotate synapse
-            synapsePivot.transform.LookAt(postSynapticNeuron.transform.position);
-
-            preSynapticNeuron.GetComponent<INode>().AddAxon(s);
+            CreateConnection(preSynapticNeuron, postSynapticNeuron);
         }
     }
 
@@ -154,5 +127,42 @@ public class NeuralNetwork : MonoBehaviour
         neighbors = sortedObjects.GetRange(1, 30);
 
         return neighbors;
+    }
+
+    public void CreateConnection(GameObject preSynapticNeuron, GameObject postSynapticNeuron)
+    {
+        //make sure this connection doesn't already exist
+        if (preSynapticNeuron.GetComponent<INode>().GetAxons().Any(x => x.GetComponent<SynapseScript>().postSynapticNeuron == postSynapticNeuron || x.GetComponent<SynapseScript>().preSynapticNeuron == postSynapticNeuron))
+            return;
+
+        //create pivot
+        GameObject synapsePivot = new GameObject();
+        synapsePivot.name = "SynapseHolder";
+        synapsePivot.transform.SetParent(preSynapticNeuron.transform);
+        synapsePivot.transform.position = preSynapticNeuron.transform.position;
+
+        float distance = Vector3.Distance(preSynapticNeuron.transform.position, postSynapticNeuron.transform.position);
+
+        //create object
+        GameObject s = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        s.name = "Synapse";
+
+        s.transform.SetParent(synapsePivot.transform);
+        s.transform.localScale = new Vector3(0.25F, 0.25F, distance);
+        s.transform.position = synapsePivot.transform.position;
+        s.transform.localPosition = new Vector3(0, 0, (distance / 2F));
+
+        //set synapse data
+        SynapseScript script = s.AddComponent<SynapseScript>();
+        script.preSynapticNeuron = preSynapticNeuron;
+        script.postSynapticNeuron = postSynapticNeuron;
+        script.delay = 4;
+        script.weight = 1;
+        script.type = GameHandler.SynapseType.Excitatory;
+
+        //rotate synapse
+        synapsePivot.transform.LookAt(postSynapticNeuron.transform.position);
+
+        preSynapticNeuron.GetComponent<INode>().AddAxon(s);
     }
 }

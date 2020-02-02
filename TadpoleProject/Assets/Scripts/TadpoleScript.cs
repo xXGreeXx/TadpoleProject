@@ -111,4 +111,13 @@ public class TadpoleScript : MonoBehaviour
         //return data
         return outputData.ToArray();
     }
+
+    //collide with food
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name.Contains("Food"))
+        {
+            Destroy(collision.gameObject);
+        }
+    }
 }
