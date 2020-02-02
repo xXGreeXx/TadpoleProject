@@ -36,7 +36,7 @@ public class GameHandler : MonoBehaviour
     public const int BaseChlorideCount = 250;
 
     //global neural network data
-    public static int HiddenNeuronCount = 300;
+    public static int HiddenNeuronCount = 100;
     public static int Size = 100;
     public static int InputNeurons = 10;
     public static int OutputNeurons = 10;
@@ -183,13 +183,15 @@ public class GameHandler : MonoBehaviour
     private float CalculateLead(GameObject lead)
     {
         float averagePotential = 0;
+        float count = 0;
 
         float max = brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons.Max(x => Vector3.Distance(x.transform.position, lead.transform.position));
         foreach (GameObject neuron in brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons)
         {
             averagePotential += neuron.GetComponent<Neuron>().MembranePotential * (1 - (Vector3.Distance(lead.transform.position, neuron.transform.position) / max));
+            count += 1 - (Vector3.Distance(lead.transform.position, neuron.transform.position) / max);
         }
-        averagePotential /= brainOrigin.GetComponent<NeuralNetwork>().hiddenNeurons.Count;
+        averagePotential /= count;
 
         return averagePotential;
     }

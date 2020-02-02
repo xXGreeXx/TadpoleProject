@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Assets.Scripts;
 public class InputScript : MonoBehaviour, Assets.Scripts.INode
 {
     //globals
@@ -42,6 +42,41 @@ public class InputScript : MonoBehaviour, Assets.Scripts.INode
         }
 
         membranePotential = 10;
+
+        //connect to a random neuron
+        INode preSynapticNeuronScript = (this.GetComponent<Neuron>() != null ? (INode)this.GetComponent<Neuron>() : (this.GetComponent<InputScript>() != null ? (INode)this.GetComponent<InputScript>() : null));
+
+        //get data
+        GameObject postSynapticNeuron = preSynapticNeuronScript.getNeighbors()[Random.Range(0, preSynapticNeuronScript.getNeighbors().Count)];
+
+        GameObject synapsePivot = new GameObject();
+        synapsePivot.name = "SynapseHolder";
+        synapsePivot.transform.SetParent(this.transform);
+        synapsePivot.transform.position = this.transform.position;
+
+        float distance = Vector3.Distance(this.transform.position, postSynapticNeuron.transform.position);
+
+        //create object
+        GameObject s = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        s.name = "Synapse";
+
+        s.transform.SetParent(synapsePivot.transform);
+        s.transform.localScale = new Vector3(0.25F, 0.25F, distance);
+        s.transform.position = synapsePivot.transform.position;
+        s.transform.localPosition = new Vector3(0, 0, (distance / 2F));
+
+        //set synapse data
+        SynapseScript script = s.AddComponent<SynapseScript>();
+        script.preSynapticNeuron = this.gameObject;
+        script.postSynapticNeuron = postSynapticNeuron;
+        script.delay = 1;
+        script.weight = 1;
+        script.type = GameHandler.SynapseType.Excitatory;
+
+        //rotate synapse
+        synapsePivot.transform.LookAt(postSynapticNeuron.transform.position);
+
+        this.GetComponent<INode>().AddAxon(s);
     }
 
     //add axon to list
