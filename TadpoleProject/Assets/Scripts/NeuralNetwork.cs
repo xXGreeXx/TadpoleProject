@@ -132,7 +132,11 @@ public class NeuralNetwork : MonoBehaviour
     public void CreateConnection(GameObject preSynapticNeuron, GameObject postSynapticNeuron)
     {
         //make sure this connection doesn't already exist
-        if (preSynapticNeuron.GetComponent<INode>().GetAxons().Any(x => x.GetComponent<SynapseScript>().postSynapticNeuron == postSynapticNeuron || x.GetComponent<SynapseScript>().preSynapticNeuron == postSynapticNeuron))
+        if (preSynapticNeuron.GetComponent<INode>().GetAxons().Any(x => x.GetComponent<SynapseScript>().postSynapticNeuron == postSynapticNeuron ||  //check if this neuron is already connected to postSynapticNeuron
+                                                                        x.GetComponent<SynapseScript>().preSynapticNeuron == postSynapticNeuron))
+            return;
+
+        if (postSynapticNeuron.GetComponent<INode>() != null && postSynapticNeuron.GetComponent<INode>().GetAxons().Any(x => x.GetComponent<SynapseScript>().postSynapticNeuron == preSynapticNeuron)) //check if postSynapticNeuron is already connected to this neuron
             return;
 
         //create pivot
@@ -156,7 +160,7 @@ public class NeuralNetwork : MonoBehaviour
         SynapseScript script = s.AddComponent<SynapseScript>();
         script.preSynapticNeuron = preSynapticNeuron;
         script.postSynapticNeuron = postSynapticNeuron;
-        script.delay = 4;
+        script.delay = 0.5F;
         script.weight = 1;
         script.type = GameHandler.SynapseType.Excitatory;
 

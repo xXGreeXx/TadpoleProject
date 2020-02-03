@@ -56,10 +56,10 @@ public class SynapseScript : MonoBehaviour
         SpikeScript script = spike.AddComponent<SpikeScript>();
         script.startPosition = preSynapticNeuron.transform.position;
         script.postSynapticObject = postSynapticNeuron;
-        script.delayCycles = 0.5F; //TODO\\ change this too
+        script.delayCycles = delay; //TODO\\ change this too
         script.weight = weight - fatigue; //TODO\\ use vesicle data to calculate this
         script.type = type;
 
-        //fatigue += 0.5F; //TODO\\ change this
+        fatigue += 0.5F; //TODO\\ change this
     }
 }

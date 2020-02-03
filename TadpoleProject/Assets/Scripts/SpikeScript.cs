@@ -33,15 +33,15 @@ public class SpikeScript : MonoBehaviour
                     switch (type)
                     {
                         case GameHandler.SynapseType.Excitatory:
-                            postSynapticObject.GetComponent<Neuron>().SodiumCount += Mathf.Max((int)(weight * 25), 0);
+                            postSynapticObject.GetComponent<Neuron>().SodiumCount += Mathf.Max((int)(weight * 15), 0);
                             break;
 
                         case GameHandler.SynapseType.Inhibitory:
-                            postSynapticObject.GetComponent<Neuron>().PotassiumCount -= Mathf.Max((int)(weight * 25), 0);
+                            postSynapticObject.GetComponent<Neuron>().PotassiumCount -= Mathf.Max((int)(weight * 15), 0);
                             break;
 
                         case GameHandler.SynapseType.Modulatory:
-                            postSynapticObject.GetComponent<Neuron>().ModulatorCount += Mathf.Max((int)(weight * 25), 0);
+                            postSynapticObject.GetComponent<Neuron>().ModulatorCount += Mathf.Max((int)(weight * 15), 0);
                             break;
                     }
                 }
